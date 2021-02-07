@@ -1,0 +1,32 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+    <script defer src="/BookShopMVC/public/js/comments.js" ></script>
+
+    <form >
+
+        <div class="form-group">
+            <label for="formGroupExampleInput">Новый комментарий</label>
+            <textarea type="text" class="form-control" id="AddCommentInput" placeholder="Напишите комментарий длинной от 4 до 1500 символов!"></textarea>
+            <div class="form-group">
+                <div id="errorInput" style=" display: none;" class="message alert alert-danger">Текст комментария не может быть меньше 4-х символов!</div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div id="AddCommentButton" data-book-id="{{  bookID }}" data-user-id="{{  userID }}" class="btn btn-primary">Добавить</div>
+        </div>
+
+        <div class="form-group">
+            <div id="errorMessage" style="display: none;" class="message alert alert-danger">Ошибка при добавлении !</div>
+        </div>
+
+        <div class="form-group">
+            <div id="successMessage"  style="display: none;" class="message alert alert-success">Комментарий успешно добавлен!</div>
+        </div>
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'public/base.twig' %}
+
+{% block content %}
+
+    <script defer src="/BookShopMVC/public/js/orders.js"></script>
+
+    <div class="tab-pane" id="history" role="tabpanel">
+    <div class="row justify-content">
+        <div class="col text-left">
+            <h3>Детали покупки: № заказа {{ orderID }}
+                <br>сумма заказа: {{ total }} руб.
+                <br>дата заказа : {{ order.orderDatetime }}
+                <br>адрес : {{ order.adressOrder }}
+            </h3>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Обложка</th>
+            <th scope="col">Название книги</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Цена</th>
+            <th scope="col">количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for singleDetail in orderDetail  %}
+        <tr >
+
+            <th scope="row">
+                <img src="../{{ singleDetail.book.bookImagePath }}" style="float: left; width: 50px"  alt="Cinque Terre">
+            </th>
+            <td>{{ singleDetail.book.bookTitle }}</td>
+            <td>
+                {% for author in singleDetail.book.authors  %}
+                    <span> {{ author.authorFirstName }} {{ author.authorLastName}}</span>
+                    {% if loop.length<loop.index %}
+                        <span>,</span>
+                    {% endif %}
+                {% endfor %}
+
+            </td>
+            <td>{{ singleDetail.bookPrice }} руб.</td>
+            <td>{{ singleDetail.bookAmount }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div id="btn-yet-detail" style="display: none" class="container-fluid">
+        <div class="row justify-content-center ">
+            <div data-orderId="{{orderID}}" id="deal-yet-detail"  class=" col-4 btn btn-primary">еще</div>
+        </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

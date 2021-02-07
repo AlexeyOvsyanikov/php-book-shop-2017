@@ -1,0 +1,68 @@
+{% extends 'public/base.twig' %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <h1>Результат поиска: </h1>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            {% if books %}
+
+                {% for book in books %}
+
+                    <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12" style="width: 18rem; padding: 2px;">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">{{ book.bookTitle }}</h5>
+
+                            <h6 class="card-title">Авторы:
+
+                                {% if not book.attributes.authors %}
+                                    <span>Не указаны...</span>
+                                {% endif %}
+
+                                {% for author in book.attributes.authors %}
+
+                                    <span>{{ author.authorFirstName }} {{ author.authorLastName }} </span>
+
+                                    {% if loop.index < loop.length %}
+                                        <span>,</span>
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </h6>
+
+                            <h6 class="card-title">Цена: {{ book.bookTitle }} р.</h6>
+
+                            <div class="row justify-content-center"   >
+
+                                {% if not book.isInCart %}
+                                    <div data-is-in-cart="{{ book.isInCart }}" data-book-id="{{ book.bookID }}" class="btn btn-primary add-to-cart col-xl-8 col-lg-8 col-md-8 col-sm-10"> Добавить в корзину</div>
+                                {% endif %}
+
+                                <a href="/BookShopMVC/public/book/{{ book.bookID }}" class="btn btn-primary col-xl-8 col-lg-8 col-md-8 col-sm-10 " style="margin-top: 2px">О книге</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+
+            {% else %}
+                <h4>Книг не обнаружено!</h4>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+{% endblock  %}

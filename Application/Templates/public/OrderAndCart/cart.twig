@@ -1,0 +1,101 @@
+{% extends 'public/base.twig' %}
+
+{% block content %}
+
+    <script defer src="js/cart.js" ></script>
+
+    <script defer src="js/order.js" ></script>
+
+    <div class="container-fluid">
+
+        <div id="CartTableSection" class="row justify-content">
+
+            <div class="col-12 text-left">
+                <h3>Корзина:</h3>
+            </div>
+
+            {% if cartTotal != 0 %}
+                <table id="cartTable" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Фото</th>
+                        <th scope="col">Товар</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Колличество</th>
+                        <th scope="col">Сумма</th>
+                        <th scope="col">Отмена</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="body">
+
+                    {% for book in cart %}
+                        <tr data-book-id="{{ book.bookID }}">
+                            <th scope="row">
+                                <img src="{{ book.bookImagePath }}" style="float: left; width: 50px"  alt="Cinque Terre">
+                            </th>
+                            <td>
+                                <div class="row justify-content text-left" style="margin-top: 5%" >
+
+                                    <h5 >{{ book.bookTitle }}</h5>
+
+                                </div>
+                                <div class="row justify-content text-left" >
+                                    <h7 class="text-muted">Толстой Л.Н.</h7>
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="row justify-content text-left" >
+                                    <h6  style="margin-top: 20px" >{{ book.bookPrice }} руб.</h6>
+                                </div>
+                            </td>
+                            <td>
+                                <select id="supervisor" data-book-id="{{ book.bookID }}" data-book-price="{{ book.bookPrice }}" style="margin-top: 10px" class="form-control count" >
+                                    {% for item in counts %}
+                                        {% if item == book.amount %}
+                                            <option selected>{{ item }}</option>
+                                        {% else %}
+                                            <option>{{ item }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                            </td>
+                            <td id="totalPrice">
+                                <div class="row justify-content text-left" >
+                                    <h6 id="valueTotalPrice" style="margin-top: 20px" >{{ book.totalPrice }} руб.</h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div data-title="{{ book.bookTitle }}"  data-book-id="{{ book.bookID }}"  style="margin-top: 10px" class="btn btn-danger">Удалить</div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            {% else %}
+                <div id="cartEmpty" class="col-6 alert alert-info">Корзина пуста!</div>
+            {% endif %}
+
+
+        </div>
+
+        <div id="successMessage"  style=" display: none;"  class="alert alert-success">Заказ в обработке</div>
+        <div id="errorMessage" style=" display: none;" class="alert alert-danger"></div>
+
+        {% if cartTotal != 0 %}
+            <div id="BlockTotal" class="row justify-content">
+                <div class="col-md-7 text-left">
+                    <a href="/BookShopMVC/public/placeOrder" class="btn btn-primary" >ОФОРМИТЬ ЗАКАЗ</a>
+                </div>
+                <div class="col-md-5 text-right" id="formTotalOrder">
+                    <h4 id="totalSum" style="text-align: right">Итого: {{ cartTotal }} руб.</h4>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

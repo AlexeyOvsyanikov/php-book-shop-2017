@@ -1,0 +1,57 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+
+    <script defer src="/BookShopMVC/public/js/commentsPanel.js" ></script>
+
+    <h1>Модерирование комментариев</h1>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Показывать комментарии со статусом:</label>
+
+        <select class="form-control" id="commentsComboBox">
+            {% for status in statuses %}
+                {% if status.statusID == selectedId %}
+                <option data-status-id="{{ status.statusID }}" selected="selected">{{ status.statusTitle }}</option>
+
+                {% else %}
+                    <option data-status-id="{{ status.statusID }}" >{{ status.statusTitle }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+
+    </div>
+
+
+    <div id="CommentsModeratedList">
+        {% for comment in comments %}
+            <div data-comment-id="{{ comment.comment.commentID }}" class="card w-100">
+                <div class="card-body">
+
+                    <h3 class="card-title">Книга: {{ comment.book.bookTitle }}.</h3>
+
+                    <div data-comment-for-update-id="{{ comment.comment.commentID }}" class="card-text">{{ comment.comment.commentText }}</div>
+
+                    <h5 class="card-title">{{ comment.user.userLogin }} Дата: {{ comment.date }}</h5>
+
+                    <div id="ApproveButton" class="btn btn-primary"  data-comment-id="{{ comment.comment.commentID }}" >Одобрить</div>
+
+                    <div id="RejectButton" class="btn btn-danger"   data-comment-id="{{ comment.comment.commentID }}" >Отклонить</div></a>
+
+                </div>
+            </div>
+
+
+        {%endfor  %}
+    </div>
+
+    <div id="More" class="row" style="margin-top: 20px; margin-bottom: 30px;">
+
+        <div id="MoreButton" data-book-id="{{  book.bookID }}" class="btn btn-outline-primary col-3 ">ЕЩЁ</div>
+
+
+    </div>
+
+
+{% endblock %}

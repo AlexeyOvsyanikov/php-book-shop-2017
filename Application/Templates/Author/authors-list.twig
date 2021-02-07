@@ -1,0 +1,71 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <script defer src="js/authors.js" ></script>
+    <div class="row">
+        <div class="form-group col-4">
+            <label for="nameAuthor">Имя</label>
+            <input  type="text" class="form-control" id="nameAuthor" placeholder="Имя">
+        </div>
+        <div class="form-group col-4">
+            <label for="formGroupExampleInput2">Фамилия</label>
+            <input  type="text" class="form-control" id="lastNameAuthor" placeholder="Фамилия">
+        </div>
+        <div class="form-group col-4">
+            <div id="addAuthor" class="btn btn-primary" style="margin-top: 30px">Добавить автора</div>
+        </div>
+
+        <div class="form-group col-8">
+
+            <div id="successMessage"  style=" display: none;"  class="alert alert-success">Автор успешно добавлен!</div>
+            <div id="errorMessage" style=" display: none;" class="alert alert-danger">Ошибка при добавлении !</div>
+            <div id="errorInput" style=" display: none;" class="alert alert-danger">Имя или фамилия автора некорректно!</div>
+
+        </div>
+
+
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Удалить</th>
+            <th scope="col">Обновить</th>
+        </tr>
+        </thead>
+        <tbody id="authorTable">
+
+        {% for author in authors %}
+            <tr data-author-id = "{{  author.authorID }}">
+                <td>{{ author.authorID }}</td>
+                <td>{{ author.authorFirstName }}</td>
+                <td>{{ author.authorLastName }}</td>
+                <td>
+                    <button data-author-id="{{  author.authorID }}" data-author-name="{{  author.authorFirstName }}" data-author-lastname="{{  author.authorLastName }}"class="btn btn-danger"  >Удалить</button>
+                </td>
+                <td>
+                    <a href="/BookShopMVC/public/author/{{ author.authorID }}" class="btn btn-primary" >Обновить</a>
+                </td>
+            </tr>
+        {%endfor  %}
+
+        </tbody>
+    </table>
+
+
+    <div id="login-form" class="modal">
+        <div >
+            <div >
+                <h3>Удаление</h3>
+                <div>Удалить автора  <div id="nameAuthorModal"> </div> <div id="lastNameAuthorModal"></div></div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModal" type="button" class="btn btn-secondary" >Close</button>
+                <button id="deleteAuthorModal" type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

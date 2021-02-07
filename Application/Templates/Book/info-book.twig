@@ -1,0 +1,43 @@
+{% extends 'base.twig' %}
+
+{% block content%}
+
+    <div class="jumbotron pt-3 pb-1">
+
+        {% if ( book.bookImagePath )%}
+            <img src="../../{{ book.bookImagePath }}" style="float: left; width: 300px" class="rounded mr-5 mb-1" alt="Cinque Terre">
+        {% endif %}
+
+        <h1 class="display-4">{{ book.bookTitle }}</h1>
+        <p class="lead">{{ book.bookDescription }}</p>
+        <hr class="my-4">
+        <p class="lead"><b>Цена: </b>{{ book.bookPrice }} ₽</p>
+        <p class="lead"><b>Кол-во страниц:</b> {{ book.bookPages }} стр.</p>
+        <p class="lead"><b>ISBN: </b>{{ book.bookISBN }}</p>
+        <p class="lead">
+            <b>Авторы: </b><br>
+
+            <ul>
+                {% for author in book.authors %}
+                    <li>{{ author.authorFirstName }} {{ author.authorLastName }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+
+        <p class="lead">
+            <b>Жанры: </b><br>
+
+            <ul>
+                {% for genre in book.genres %}
+                    <li>{{ genre.genreTitle }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+
+        <p class="lead">
+        <a href="/BookShopMVC/public/admin/comments/{{ book.bookID }}"> <b>Комментарии (</b> {{ commentAmount.amount }}<b> )</b> </a>
+        </p>
+
+    </div>
+
+{% endblock %}

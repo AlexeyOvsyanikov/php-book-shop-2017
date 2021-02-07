@@ -1,0 +1,121 @@
+{% extends 'public/base.twig' %}
+
+{% block content%}
+    <link rel="stylesheet" href="/BookShopMVC/node_modules/bootstrap/dist/js/bootstrap.js">
+    <script defer src="js/personal-page.js" ></script>
+
+    <div class="row justify-content-center container-fluid">
+
+        {% if not user %}
+            <div class="alert alert-danger">
+                Вы не имеете доступа к кабинету! <a href="/BookShopMVC/public/authorize">Авторизируйтесь!</a>
+            </div>
+        {% else %}
+
+            <div class="col-3">
+
+                {% if not user.userAvatar %}
+
+                    <img id="userAvatar" src="../public/images/avatars/default_avatar.jpg" class="img-thumbnail img-responsive" alt="your-avatar" style="margin-bottom: 7px;">
+
+                {% else %}
+
+                    <img id="userAvatar" src="../public/{{ user.userAvatar }}" class="img-thumbnail img-responsive" alt="your-avatar" style="margin-bottom: 7px;">
+
+                {% endif %}
+
+            </div>
+
+            <div class="col-4">
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active " id="person" role="tabpanel">
+
+                        <div class="container-fluid">
+                            <div class="row justify-content">
+                                <div class="col text-left">
+                                    <h3>Личные данные:</h3>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+
+                                <div class="col col-lg-3 text-left" >
+                                    <p>Ваше имя:</p>
+                                </div>
+
+                                <div class="col-md-auto text-left">
+                                    <h6>{{ user.userLastName }} {{ user.userFirstName }} {{ user.userMiddleName }}</h6>
+                                </div>
+
+                            </div>
+
+                            <div class="row justify-content">
+                                <div class="col col-lg-3 text-left">
+                                    <p>Ваш Логин:</p>
+                                </div>
+                                <div class="col-md-auto text-left">
+                                    <h6>{{ user.userLogin }}</h6>
+                                </div>
+
+                            </div>
+
+                            <div class="row justify-content">
+                                <div class="col col-lg-3  text-left">
+                                    <p>Электронная почта:</p>
+                                </div>
+                                <div class="col-md-auto text-left">
+                                    <h6>{{ user.userEmail }}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content">
+                                <div class="col col-lg-3 text-left">
+                                    <p>Телефон:</p>
+                                </div>
+                                <div class="col-md-auto text-left">
+                                    <h6>{{ user.userPhoneNumber }}</h6>
+                                </div>
+                            </div>
+
+                            <hr>
+
+
+                            <div id="hiddenAvatarBlock" style="display: none; padding-bottom: 7px">
+
+                                <input id="avatarFile" accept="image/jpeg" type="file" class="form-control">
+                                <button type="button" class="btn btn-sm btn-primary btn-block" id="saveNewAvatar">Сохранить фотографию</button>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div id="errorInput" style=" display: none;" class="message alert alert-danger"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div id="errorMessage" style=" display: none;" class="message alert alert-danger">Ошибка при добавлении !</div>
+                            </div>
+
+                            <div class="form-group">
+                                <div id="successMessage"  style=" display: none;" class="message alert alert-success">Ваша фотография обновлена</div>
+                            </div>
+
+                            <button type="button" class="btn btn-sm btn-secondary btn-block" id="changeAvatarButton">Сменить аватар</button>
+                            <a type="button" class="btn btn-sm btn-dark btn-block" href="edit-person-data">Настроить профиль</a>
+                            <a type="button" class="btn btn-sm btn-warning btn-block" href="change-person-password">Изменить пароль</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

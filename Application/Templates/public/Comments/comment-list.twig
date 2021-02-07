@@ -1,0 +1,83 @@
+{% extends 'public/base.twig' %}
+
+{% block content %}
+
+
+    <script defer src="/BookShopMVC/public/js/comments.js" ></script>
+
+    <div class="form">
+        <div class="form-group">
+            <a href="/BookShopMVC/public/comments/new" class="btn btn-primary">Добавить новый комментарий</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Показывать комментарии со статусом:</label>
+
+        <select class="form-control" id="commentsComboBox">
+            <option value="-1">Все</option>
+            {% for status in statuses %}
+                <option data-status-id="{{ status.statusID }}" selected="selected">{{ status.statusTitle }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="formGroupExampleInput2">Поиск по названию книги...:</label>
+        <input class="form-control" placeholder="Введите название...">
+
+
+    </div>
+
+    <div id="CommentsList" data-current-user-id="{{ currentUser }}">
+
+        {% for comment in comments %}
+            <div data-comment-id="{{ comment.commentID }}" class="card w-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.author.userLogin }}</h5>
+                    <b><i>{{ comment.created }}</i></b>
+                    <div data-comment-for-update-id="{{ comment.commentID }}" class="card-text">{{ comment.commentText }}</div>
+                    <a href="#" >
+                        <i id="EditButton" data-user-id="{{ comment.userID }}" data-comment-id="{{ comment.commentID }}" class="far fa-edit fa-2x"></i>
+                    </a>
+                    <a href="#" ><i id="DeleteButton" data-book-id="{{ comment.bookID }}" data-user-id="{{ comment.userID }}" data-comment-id="{{ comment.commentID }}" class="btn-danger far fa-trash-alt fa-2x"></i></a>
+
+                </div>
+            </div>
+
+
+        {%endfor  %}
+
+    </div>
+
+    <div id="More" class="row" style="margin-top: 20px; margin-bottom: 30px;">
+
+        <div id="MoreButton" data-book-id="{{  book.bookID }}" class="btn btn-outline-primary col-3 ">ЕЩЁ</div>
+
+    </div>
+
+    <div id="ModalUpdate" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalTitleUpdate">Редактор отзыва</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="ModalUpdateBody" class="modal-body">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Измените комментарий</label>
+                        <textarea type="text" class="form-control" id="UpdateCommentInput" ></textarea>
+                        <div class="form-group">
+                            <div id="errorInput" style=" display: none;" class="message alert alert-danger">Текст комментария не может быть меньше 4-х символов!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="CancelButton"  type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button id="UpdateButton" type="button" class="btn btn-primary" data-dismiss="modal">Ок</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

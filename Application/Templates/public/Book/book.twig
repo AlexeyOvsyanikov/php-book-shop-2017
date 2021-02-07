@@ -1,0 +1,123 @@
+    {% extends 'public/base.twig' %}
+
+{% block content%}
+
+    <script defer src="/BookShopMVC/public/js/comments.js" ></script>
+
+    <div class="jumbotron pt-3 pb-1">
+
+        {% if ( book.bookImagePath )%}
+            <img src="../{{ book.bookImagePath }}" style="float: left; width: 300px" class="rounded mr-5 mb-1" alt="Cinque Terre">
+        {% endif %}
+
+        <h1 class="display-4">{{ book.bookTitle }}</h1>
+
+
+        <p>
+            <span data-book-id="{{ book.bookID }}" style="width: 200px" id="but" class="btn btn-primary add-to-cart">Добавить в корзину</span>
+        </p>
+
+        <script>
+
+            let cartIn = $.cookie('cart');
+            let id = $('#but').data('book-id');
+
+            let isInCart = false;
+
+            if( cartIn ){
+
+                let book = cartIn.find( b => +b.bookID === +id );
+
+                if(book){
+                    isInCart = true;
+                }
+
+            }
+
+            if(isInCart){
+                $('#but').css('display', 'none');
+            }
+
+
+        </script>
+
+        <p class="lead">{{ book.bookDescription }}</p>
+        <hr class="my-4">
+        <p class="lead"><b>Цена: </b>{{ book.bookPrice }} ₽</p>
+        <p class="lead"><b>Кол-во страниц:</b> {{ book.bookPages }} стр.</p>
+        <p class="lead"><b>ISBN: </b>{{ book.bookISBN }}</p>
+        <p class="lead">
+            <b>Авторы: </b><br>
+
+        <ul>
+            {% for author in book.authors %}
+                <li>{{ author.authorFirstName }} {{ author.authorLastName }}</li>
+            {% endfor %}
+        </ul>
+        </p>
+
+        <p class="lead">
+            <b>Жанры: </b><br>
+
+        <ul>
+            {% for genre in book.genres %}
+                <li>{{ genre.genreTitle }}</li>
+            {% endfor %}
+        </ul>
+        </p>
+
+        <p class="lead">
+            <a href="/BookShopMVC/public/comments/{{ book.bookID }}"> <b>Комментарии (</b> {{ commentAmount.amount }}<b> )</b> </a>
+        </p>
+
+        <div class="form">
+            {#<div class="form-group">#}
+                {#<a href="/BookShopMVC/public/comments-new/{{ book.bookID }}" class="btn btn-primary">Добавить новый комментарий</a>#}
+            {#</div>#}
+
+            <form style="margin-top: 25px;">
+
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Новый комментарий</label>
+                    <textarea type="text" class="form-control" id="AddCommentInput" placeholder="Напишите комментарий длинной от 4 до 1500 символов!"></textarea>
+                    <div class="form-group">
+                        <div id="errorInput" style=" display: none;" class="message alert alert-danger">Текст комментария не может быть меньше 4-х символов!</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div id="AddCommentButton" data-book-id="{{ book.bookID }}" class="btn btn-primary">Добавить</div>
+                </div>
+
+                <div class="form-group">
+                    <div id="errorMessage" style="display: none;" class="message alert alert-danger">Ошибка при добавлении !</div>
+                </div>
+
+                <div class="form-group">
+                    <div id="successMessage"  style="display: none;" class="message alert alert-success">Комментарий отправлен на модерацию!</div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div id="CommentsList">
+
+            {% for comment in book.comments %}
+                <div data-comment-id="{{ comment.commentID }}" class="card w-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ comment.author.userLogin }}</h5>
+                        <b><i>{{ comment.created }}</i></b>
+                        <div data-comment-for-update-id="{{ comment.commentID }}" class="card-text">{{ comment.commentText }}</div>
+                    </div>
+                </div>
+
+
+            {%endfor  %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

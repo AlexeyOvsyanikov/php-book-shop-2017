@@ -1,0 +1,86 @@
+{% extends 'base.twig' %}
+
+{% block content%}
+
+    <script defer src="/BookShopMVC/public/js/book.js" ></script>
+
+    <form>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Название книги </label>
+            <input id="bookTitle" type="text" class="form-control" placeholder="Название книги">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">ISBN</label>
+            <input id="bookISBN" type="text" class="form-control" placeholder="ISBN">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Кол-во страницы</label>
+            <input id="bookPages" type="text" class="form-control" placeholder="Кол-во страниц">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Цена книги</label>
+            <input id="bookPrice" type="text" class="form-control" placeholder="Цена книги">
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Кол-во в магазине</label>
+            <input id="bookAmount" type="text" class="form-control" placeholder="Кол-во книг">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Описание</label>
+            <textarea id="bookDescription" class="form-control" placeholder="Описание" ></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Авторы</label>
+
+            <input id="authorSearch" type="text" class="form-control" placeholder="Поиск...">
+
+            <select multiple class="form-control" id="authorsList">
+                {% for author in authors %}
+                    <option data-author-id="{{ author.authorID }}">{{ author.authorFirstName }} {{ author.authorLastName }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Жанры</label>
+
+            <input id="genresSearch" type="text" class="form-control" placeholder="Поиск...">
+
+            <select multiple class="form-control" id="genresList">
+                {% for genre in genres %}
+                    <option data-genre-id="{{ genre.genreID }}">{{ genre.genreTitle }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Обложка</label>
+            <input id="bookFile" accept="image/jpeg" type="file" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <div id="errorInput" style=" display: none;" class="message alert alert-danger"></div>
+        </div>
+
+        <div class="form-group">
+            <div id="AddBookButton" class="btn btn-primary" >Добавить</div>
+        </div>
+
+        <div class="form-group">
+            <div id="errorMessage" style=" display: none;" class="message alert alert-danger">Ошибка при добавлении !</div>
+        </div>
+
+        <div class="form-group">
+            <div id="successMessage"  style=" display: none;" class="message alert alert-success">Книга успешно добавлена!</div>
+        </div>
+
+    </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.twig' %}
+
+{% block content%}
+
+    <script defer src="/BookShopMVC/public/js/genres.js" ></script>
+    <form>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Название жанра</label>
+            <input value="{{ genre.genreTitle }}" type="text" class="form-control" id="UpdateGenreInput" placeholder="Имя">
+            <div class="form-group">
+                <div id="errorInput" style=" display: none;" class="message alert alert-danger">Название жанра некорректно!</div>
+            </div>
+        </div>
+
+
+        <div class="form-group" id="UpdateGenreButton" data-genre-id="{{  genre.genreID }}" >
+            <div   class="btn btn-primary">Обновить</div>
+        </div>
+        <div class="form-group">
+            <div id="errorMessage" style=" display: none;" class="message alert alert-danger">Ошибка при обновлении !</div>
+        </div>
+
+        <div class="form-group">
+            <div id="successMessage"  style=" display: none;" class="message alert alert-success">Жанр успешно обновлен!</div>
+        </div>
+    </form>
+
+{% endblock %}

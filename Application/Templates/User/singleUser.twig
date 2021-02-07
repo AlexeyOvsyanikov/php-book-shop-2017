@@ -1,0 +1,21 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <a href="/BookShopMVC/public/users">&#8592;</a>
+    <form>
+        <fieldset disabled>
+            <div class="form-group">
+                <label for="disabledTextInput">ID</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.userID }}">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">Логин</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.userLogin }}">
+            </div>
+            <div class="form-group">
+                <label for="disabledTextInput">Email</label>
+                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ user.userEmail }}">
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

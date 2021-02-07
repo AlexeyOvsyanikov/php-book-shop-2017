@@ -1,0 +1,84 @@
+{% extends 'public/base.twig' %}
+
+{% block content %}
+
+    <script defer src="/BookShopMVC/public/js/order.js" ></script>
+
+   <div class="container text-center">
+
+       <div class="col-12">
+           <h3>Оформление заказа</h3>
+       </div>
+
+       {% if total == 0%}
+            <h4>Корзина пуста!</h4>
+       {% else %}
+
+            <div class="row">
+
+           <div class="col-6">
+
+               {% if not user %}
+                   <div class="alert alert-info">
+                       Вы не можете оформить заказ! <a href="/BookShopMVC/public/authorize">Авторизируйтесь!</a>
+                   </div>
+               {% else %}
+
+                   <div class="input-group mb-3">
+                       <input readonly type="text" class="form-control" placeholder=" Введите адресс" value="{{ user.lastName}} {{ user.firstName}} {{ user.middleName}}">
+                   </div>
+                   <div class="input-group mb-3">
+                       <input id="orderAdress" type="text" class="form-control" placeholder=" Введите адресс">
+                   </div>
+
+                   <div id="successMessage"  style=" display: none;"  class="alert alert-success"></div>
+                   <div id="errorMessage" style=" display: none;" class="alert alert-danger"></div>
+
+
+                   <div id="addOrder" class="btn btn-primary col-12">ОФОРМИТЬ ЗАКАЗ</div>
+               {% endif %}
+
+
+
+           </div>
+
+           <div class="col-6">
+               <table class="table table-striped">
+                   <thead>
+                   <tr>
+                       <th scope="col">Фото</th>
+                       <th scope="col">Название книги</th>
+                       <th scope="col">Цена</th>
+                       <th scope="col">Количество</th>
+
+                   </tr>
+                   </thead>
+                   <tbody>
+                   {% for od in cart %}
+                       <tr>
+                           <th scope="row">
+                               <img src="{{od.book.bookImagePath}}" style="float: left; width: 50px"  alt="Cinque Terre">
+                           </th>
+                           <td>{{od.book.bookTitle}}</td>
+                           <td>{{od.book.bookPrice}} руб.</td>
+                           <td>{{od.cart.amount}}</td>
+                       </tr>
+                   {%endfor  %}
+                   </tbody>
+               </table>
+
+               <div class="row justify-content-end">
+                   <div class="col-4" ><span style="font-size: 18px"><strong>Итого:</strong> {{ total }} руб.</span> </div>
+               </div>
+           </div>
+
+       </div>
+
+       {% endif %}
+
+
+
+
+   </div>
+
+{% endblock %}

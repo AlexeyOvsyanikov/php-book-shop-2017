@@ -1,0 +1,132 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+    <script defer src="js/genres.js" ></script>
+
+    <style>
+        #wind {
+            width: 400px;
+            height: 300px;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #999999;
+            color: #333333;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            background: #ffffff;
+        }
+
+        .close {
+            width: 70%;
+            display: inline-block;
+            border: 1px solid #0000cc;
+            color: #0000cc;
+            padding: 0 12px;
+            margin-right: 15%;
+            margin-left: 15%;
+            margin-top: 5%;
+            text-decoration: none;
+            background: #f2f2f2;
+            font-size: 14pt;
+            cursor:pointer;
+            padding:15px;
+        }
+        .close:hover {background: #e6e6ff;}
+
+        #fon {
+            background: rgba(102, 102, 102, 0.5);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+
+    </style>
+
+
+
+    <form >
+        <div class="form-group">
+            <label for="formGroupExampleInput">Название жанра</label>
+            <input type="text" class="form-control" id="AddGenreInput" placeholder="Наименование жанра">
+            <div class="form-group">
+                <div id="errorInput" style=" display: none;" class="message alert alert-danger">Название жанра некорректно!</div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div id="AddGenreButton"  data-genre-id="{{  genre.genreID }}" class="btn btn-primary">Добавить</div>
+        </div>
+
+        <div class="form-group">
+            <div id="errorMessage" style=" display: none;" class="message alert alert-danger">Ошибка при добавлении !</div>
+        </div>
+
+        <div class="form-group">
+            <div id="successMessage"  style=" display: none;" class="message alert alert-success">Жанр успешно добавлен!</div>
+        </div>
+
+    </form>
+
+    <div id="fon">
+    <div id="wind">
+
+        <div class="form">
+            <h6>Вы действительно хотите удалить жанр</h6>
+            <h4 id="genreIDLabel"></h4>
+            <h4 id="genreName"></h4>
+            <div class="form-group">
+                <a href="#" id="okDeleteGenre" class="close">OK</a>
+                <a href="#"  id="noDeleteGenre" class="close">Отмена</a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+    <table class="table" id="GenresTable" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Наименование жанра</th>
+            <th scope="col">Кол-во книг в жанре</th>
+            <th scope="col">Удалить</th>
+            <th scope="col">Обновить</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for genre in genres %}
+            <tr data-genre-id = "{{  genre.genres.genreID }}">
+                <td>{{ genre.genres.genreID }}</td>
+                <td>{{ genre.genres.genreTitle }}</td>
+
+                <td> {{ genre.amount }}</td>
+                <td>
+                    <button   data-genre-id="{{  genre.genres.genreID }}" data-genre-name="{{  genre.genres.genreTitle }}" class="btn btn-danger" >Удалить</button>
+                </td>
+                <td>
+                    <a href="/BookShopMVC/public/genre/{{ genre.genres.genreID  }}" class="btn btn-primary" >Обновить</a>
+                </td>
+            </tr>
+
+
+        {%endfor  %}
+
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

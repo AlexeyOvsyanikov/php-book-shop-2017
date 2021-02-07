@@ -1,0 +1,31 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for user in users %}
+            <tr>
+                <td>{{ user.userID }}</td>
+                <td>{{ user.userLogin }}</td>
+                <td>{{ user.userEmail }}</td>
+
+                <td>
+                    <a href="/BookShopMVC/public/user/{{ user.userLogin }}" class="btn btn-primary" >подробнее</a>
+                </td>
+            </tr>
+        {%endfor  %}
+
+        </tbody>
+    </table>
+    <div>
+        <div id="moreUser" class="btn btn-primary" >еще</div>
+    </div>
+{% endblock %}

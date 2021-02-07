@@ -1,0 +1,81 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+    <title>Личный кабинет</title>
+
+    <script defer src="/BookShopMVC/public/js/personal-page.js"></script>
+
+    <div class="row">
+
+        <div class="col-4">
+
+            {% if not user.userAvatar %}
+
+                    <img id="userAvatar" src="../public/images/avatars/default_avatar.jpg" class="img-thumbnail img-responsive" alt="your-avatar" style="margin-bottom: 7px;">
+
+                {% else %}
+
+                    <img id="userAvatar" src="../public/{{ user.userAvatar }}" class="img-thumbnail img-responsive" alt="your-avatar" style="margin-bottom: 7px;">
+
+            {% endif %}
+
+            <div id="hiddenAvatarBlock" style="display: none; padding-bottom: 7px">
+
+                <input id="avatarFile" accept="image/jpeg" type="file" class="form-control">
+                <button type="button" class="btn btn-sm btn-primary btn-block" id="saveNewAvatar">Сохранить фотографию</button>
+
+            </div>
+
+            <div class="form-group">
+                <div id="errorInput" style=" display: none;" class="message alert alert-danger"></div>
+            </div>
+
+            <div class="form-group">
+                <div id="errorMessage" style=" display: none;" class="message alert alert-danger">Ошибка при добавлении !</div>
+            </div>
+
+            <div class="form-group">
+                <div id="successMessage"  style=" display: none;" class="message alert alert-success">Ваша фотография обновлена</div>
+            </div>
+
+            <button type="button" class="btn btn-sm btn-secondary btn-block" id="changeAvatarButton">Сменить аватар</button>
+            <a type="button" class="btn btn-sm btn-dark btn-block" href="edit-personal-data">Настроить профиль</a>
+
+        </div>
+
+        <div class="col-8">
+
+            <form>
+
+                <div class="form-group row">
+                    <label for="staticLogin" class="col-sm-2 col-form-label">Ваш логин</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control" id="Login" value="{{ user.userLogin }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Ваш Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control" id="Login" value="{{ user.userEmail }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="staticLogin" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <a type="button" class="btn btn-lg btn-warning" href="change-password">Изменить пароль</a>
+                    </div>
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+    <script defer src="/BookShopMVC/public/js/book.js" ></script>
+
+    <div class="form-group">
+        <a href="/BookShopMVC/public/new-book/" class="btn btn-primary" >Добавить книгу</a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Кол-во страниц</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Кол-во</th>
+            <th scope="col">Удалить</th>
+            <th scope="col">Редактировать</th>
+            <th scope="col">Информация о книге</th>
+        </tr>
+        </thead>
+        <tbody id="booksList">
+
+        {% for book in books %}
+
+            <tr data-book-id="{{ book.bookID }}">
+                <td>{{ book.bookID }}</td>
+                <td>{{ book.bookTitle }}</td>
+                <td>{{ book.bookISBN }}</td>
+                <td>{{ book.bookPages }}</td>
+                <td>{{ book.bookPrice }}</td>
+                <td>{{ book.bookAmount }}</td>
+                <td>
+                    <button class="btn btn-danger" data-book-id="{{ book.bookID }}" data-book-title="{{ book.bookTitle }}">Удалить</button>
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" href="/BookShopMVC/public/admin/edit-books/{{ book.bookID }}" data-book-id="{{ book.bookID }}">Редактировать</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/BookShopMVC/public/admin/info-book/{{ book.bookID }}">Посмотреть</a>
+                </td>
+            </tr>
+
+        {%endfor  %}
+
+        </tbody>
+
+        <div  style='width:100%;height:50px;text-align:center;margin:0 auto;cursor:pointer'>
+            <div id="show_more">Показать еще</div>
+        </div>
+
+    </table>
+
+{% endblock %}

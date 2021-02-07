@@ -1,0 +1,42 @@
+{% extends 'base.twig' %}
+
+{% block content%}
+
+    <script defer src="../js/authors.js" ></script>
+
+    <form>
+        <div class="form-group">
+            <label for="nameAuthor">Имя</label>
+            <input value="{{ author.authorFirstName }}" type="text" class="form-control" id="nameAuthor" placeholder="Имя">
+        </div>
+        <div class="form-group">
+            <label for="lastNameAuthor">Фамилия</label>
+            <input  value="{{ author.authorLastName }}" type="text" class="form-control" id="lastNameAuthor" placeholder="Фамилия">
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <div id="successMessage"  style=" display: none;" class="message alert alert-success">Автор успешно обновлен!</div>
+            </div>
+
+            <div class="form-group">
+                <div id="errorMessage" style=" display: none;" class="message alert alert-danger">Ошибка при обновлении !</div>
+            </div>
+
+            <div class="form-group">
+                <div id="errorInput" style=" display: none;" class="message alert alert-danger">Имя или фамилия автора некорректно!</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="btn btn-primary" id="updateAuthor" data-author-id="{{ author.authorID }}">Обновить</div>
+        </div>
+
+        <div class="form-group">
+            <div id="removeAuthor" data-author-id="{{ author.authorID }}" class="btn btn-danger">Удалить</div>
+        </div>
+
+    </form>
+
+
+{% endblock %}

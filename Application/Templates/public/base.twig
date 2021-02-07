@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/BookShopMVC/node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="/BookShopMVC/node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.6.1/js/all.js" integrity="sha384-R5JkiUweZpJjELPWqttAYmYM1P3SNEJRM6ecTQF05pFFtxmCO+Y1CiUhvuDzgSVZ" crossorigin="anonymous"></script>
+
+    <script src="/BookShopMVC/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/BookShopMVC/node_modules/jquery.cookie/jquery.cookie.js"></script>
+
+    <link rel="stylesheet" href="/BookShopMVC/public/css/app.css">
+
+    <script src="/BookShopMVC/public/js/app.js"></script>
+    <script src="/BookShopMVC/public/js/validators.js"></script>
+
+
+    <title>Title</title>
+</head>
+
+<body >
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" style="padding: 5px" href="/BookShopMVC/public/">Book shop</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Заказы
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/BookShopMVC/public/cart">Корзина</a>
+                    <a class="dropdown-item" href="/BookShopMVC/public/orders">Мои заказы</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Личные данные
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/BookShopMVC/public/person">Личный кабинет</a>
+                    <a class="dropdown-item" id="signOut" href="">Выйти</a>
+                </div>
+            </li>
+        </ul>
+
+        <a href="/BookShopMVC/public/cart"> <div class="row" style="margin-right: 20px">
+
+                    <div class="col-4" >
+                        <img src="/BookShopMVC/public/images/cart/Korzina.png" style="width: 35px" class="rounded float-left" alt="...">
+                    </div>
+                    <div class="col-4">
+                        <p id="Order" style="color: white; font-size: 22px"></p>
+                    </div>
+
+                    <script>
+
+                        let cart = $.cookie('cart');
+
+                        if(!cart){
+                            cart = 0;
+                        }//
+                        else{
+                            cart = cart.length;
+                        }
+
+                        $('#Order').text(`(${cart})`);
+
+                    </script>
+
+        </div></a>
+        <form action="search" method="post" name="searchForm" class="form-inline my-2 my-lg-0">
+            <input id="searchInput" class="form-control mr-sm-2" type="search" name="search" placeholder="Введите слово .." aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchForm">Поиск</button>
+        </form>
+    </div>
+</nav>
+
+
+
+<div class="container-fluid">
+    <div class="row" style="padding: 10px">
+        <main role="main" class="col-12">
+            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <div>
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+</div>
+
+<div id="Modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ModalBody" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="CancelButton"  type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button id="OkButton" type="button" class="btn btn-primary" data-dismiss="modal">Ок</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

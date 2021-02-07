@@ -1,0 +1,78 @@
+{% extends 'public/base.twig' %}
+
+{% block content %}
+
+    <script defer src="js/personal-page.js" ></script>
+
+    <h3>Изменение личной информации</h3>
+
+    <form>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Ваш Email</label>
+            <input type="text" class="form-control" id="newEmailInput" placeholder="Введите Email" value="{{ user.userEmail }}">
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Ваш телефон</label>
+            <input type="text" class="form-control" id="newPhoneNumberInput" placeholder="Введите Email" value="{{ user.userPhoneNumber }}">
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Ваша фамилия</label>
+            <input type="text" class="form-control" id="newLastNameInput" placeholder="Введите Email" value="{{ user.userLastName }}">
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Ваше имя</label>
+            <input type="text" class="form-control" id="newFirstNameInput" placeholder="Введите Email" value="{{ user.userFirstName }}">
+        </div>
+
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Ваше отчество</label>
+            <input type="text" class="form-control" id="newMiddleNameInput" placeholder="Введите Email" value="{{ user.userMiddleName }}">
+        </div>
+
+    </form>
+
+    <div class="form-group">
+        <div id="errorMessage" style=" display: none;" class="message alert alert-danger"></div>
+    </div>
+
+    <div class="form-group">
+        <div id="successMessage"  style=" display: none;" class="message alert alert-success"></div>
+    </div>
+
+    <a type="button" class="btn btn-danger" id="cancelEdit" href="person">Отмена</a>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter" id="SaveNewData">Сохранить</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Сохранить изменённые данные?</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+                    Вы действительно хотите изменить персональные данные?
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="ConfirmChangesModalButton">Подтвердить</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% block content %}
+
+    <link rel="stylesheet" href="/BookShopMVC/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/BookShopMVC/public/css/app.css">
+
+    <script src="/BookShopMVC/node_modules/jquery/dist/jquery.js"></script>
+
+    <script src="/BookShopMVC/node_modules/jquery.cookie/jquery.cookie.js"></script>
+
+    <script src="/BookShopMVC/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="/BookShopMVC/public/js/app.js"></script>
+    <script src="/BookShopMVC/public/js/validators.js"></script>
+
+    <div class="container-fluid">
+
+        <div class="row justify-content-center">
+
+            <form class="col-6">
+
+                <h3 class="row justify-content-center">Регистрация</h3>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail">Логин</label>
+                    <input id="login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Логин">
+                    <small id="loginError" class="form-text ">Логин от 4 до 16 символов</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail">@Email</label>
+                    <input id="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email">
+                    <small id="emailError" class="form-text ">Название@email.домен</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail">Имя</label>
+                    <input id="firstNameInput" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Имя">
+                    <small id="firstNameError" class="form-text ">Имя должно содержать от 2 до 16 символов</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail">Фамилия</label>
+                    <input id="lastNameInput" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Фамилия">
+                    <small id="lastNameError" class="form-text ">Фамилия должно содержать от 2 до 16 символов</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail">Отчество</label>
+                    <input id="middleNameInput" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Отчество">
+                    <small id="middleNameError" class="form-text ">Отчество должно содержать от 2 до 16 символов</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmai1">Номер телефона</label>
+                    <input id="phoneNumberInput" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Номер телефона">
+                    <small id="phoneNumberError" class="form-text ">+XX(XXX)XXX-XX-XX</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Пароль</label>
+                    <input id="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Ваш пароль">
+                    <small id="passwordError" class="form-text "></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Подтвердить пароль </label>
+                    <input id="confirmPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Подтвердите пароль">
+                    <small id="confirmPasswordError" class="form-text  none">Неверный пароль</small>
+                </div>
+
+                <div id = "checkIn" type="submit" class="btn btn-primary">Зарегестрироваться</div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div id="Modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="ModalBody" class="modal-body"></div>
+                <div class="modal-footer">
+                    <button id="CancelButton"  type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button id="ConfirmButton" type="button" class="btn btn-primary" data-dismiss="modal">Ок</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

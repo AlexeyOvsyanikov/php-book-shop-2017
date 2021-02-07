@@ -1,0 +1,15 @@
+{
+    "name": "alexey/book-shop-mvc",
+    "authors": [],
+    "require": {
+        "bramus/router": "~1.3",
+      "twig/twig": "^1.37",
+        "polarising/bcrypt": "^1.0",
+        "predis/predis": "^1.1"
+    },
+    "autoload": {
+      "psr-4":{
+        "Application\\": "Application/"
+      }
+    }
+}
